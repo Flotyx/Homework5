@@ -1,17 +1,19 @@
 import React,{useState} from 'react'
-import TodoApp from "../Component/ToDoApp"
+import ToDoApp from "../Component/ToDoApp"
 import Login from './login'
 
-const Router = ()=>{
-    const [isLogin,LoginState] = useState(false)
+const Router = ()=>
+{
+    const [logining,setLogining] = useState(false)
 
-    const onlogin =(state)=>{
-        LoginState(true)
+    const islogin =(state)=>
+    {
+        setLogining(true)
     }
 
     return (
         <div>
-            {isLogin ? <TodoApp/> : <Login onLogin = {onlogin}/>}
+            {logining ? <ToDoApp/> : <Login onLogin = {islogin}/>}
         </div>
     )
 }

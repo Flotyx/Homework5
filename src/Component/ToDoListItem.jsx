@@ -7,16 +7,13 @@ const btnStyle={color:"blue"}
 const ToDoListItem = (props)=>
 {
     const [finish,setFinish]=useState(props.item)
-
-    const Done =()=>
-    {
-        if(!props.item.finish)
-        {
+    
+    const Done =()=>{
+        if(!props.item.finish){
                 setFinish(oldObj => oldObj.finish = true)
                 props.Done(props.item)
+            }
         }
-    }
-    
 
     const Delete =()=>
     {
@@ -24,7 +21,7 @@ const ToDoListItem = (props)=>
     }
 
     return(
-        <div>
+        <div >
            <ul style={ulStyle}>
            {props.item.finish === true ?  
            <li style={listStlye}><del>{props.item.ToDo}</del></li> :   
