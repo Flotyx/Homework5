@@ -3,29 +3,30 @@ import ToDoTitle from './ToDoTitle'
 import ToDoForm from './ToDoForm'
 import ToDoList from './ToDoList'
 
+var lists = []
+
 //useState就是[state，useState],還有記得上面要引用useState
 const TodoApp = (props)=>
 {
-    const [record,setRecord] = useState([])
+    const [lists,setLists] = useState([])
 
     const AddItem=(item)=>
     {
-        setRecord(oldArray => [...oldArray,{"ToDo":item,"finish":false}])
+        setLists(Array => [...Array,{"ToDo":item,"finish":false}])
     }
 
-    const DeleteItem = (item) =>
+    const DeleteItem = (item,index) =>
     {
-        setRecord(oldArray => oldArray.filter(x=>x.ToDo !== item.ToDo))
+        setLists(oldArray =>  oldArray.filter(x=>oldArray.indexOf(x) !== index))
     }
 
-    const DoneItem = (item) =>
+    const DoneItem = (item,index) =>
     {
         console.log(item)
-        var data = record.findIndex(x => x.ToDo === item.ToDo)
-        var arr = record
-        arr[data].finish = true
-        setRecord(arr)
-        console.log(record)
+        var array = lists
+        array[index].isDone = true
+        setLists(array)
+        console.log(lists)
 
     }
 
@@ -33,7 +34,7 @@ const TodoApp = (props)=>
         <div>
             <ToDoTitle />
             <ToDoForm onAdd = {AddItem}/>
-            <ToDoList list={record} Delete={DeleteItem} Done = {DoneItem}/>
+            <ToDoList list={lists} onDelete={DeleteItem} onDone = {DoneItem}/>
         </div>
     )
 }

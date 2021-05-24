@@ -1,36 +1,34 @@
-import React ,{useState  }from 'react'
+import React, {useState} from 'react'
 
-const ulStyle={display:'flex',listStyle:'square',justifyContent:'flex-start'}
-const listStlye={padding:'10px'}
-const btnStyle={color:"blue"}
+const ULStyle={display:'flex', justifyContent:'center'}
+const listStyle={padding:'10px'}
 
-const ToDoListItem = (props)=>
-{
-    const [finish,setFinish]=useState(props.item)
-    
-    const Done =()=>{
-        if(!props.item.finish){
-                setFinish(oldObj => oldObj.finish = true)
-                props.Done(props.item)
-            }
+const ToDoListItem = (props)=>{
+    const [isDone,setIsDone]=useState(props.item)
+
+    const onDone=()=>{
+        if(!props.item.isDone){
+            setIsDone(OldObject => OldObject.isDone = true)
+            props.onDone(props.item,props.index)
+            console.log(props.item)
         }
+    }
 
-    const Delete =()=>
-    {
-        props.Delete(props.item)
+    const onDelete=()=>{
+        props.onDelete(props.item,props.index)
     }
 
     return(
-        <div >
-           <ul style={ulStyle}>
-           {props.item.finish === true ?  
-           <li style={listStlye}><del>{props.item.ToDo}</del></li> :   
-            <li style={listStlye}>{props.item.ToDo}</li>}
-            <div><button onClick={Done} style={btnStyle}>Done</button>
-            <button onClick={Delete} style={btnStyle}>Delete</button></div>
-           </ul>
-        </div>
+    <div>
+    <ul style={ULStyle}>
+    {props.item.isDone === true?
+    <li style={listStyle}><del>{props.item.ToDo}</del></li> :   
+    <li style={listStyle}>{props.item.ToDo}</li>}
+    <div><button onClick={onDone}>Done</button>
+    <button onClick={onDelete}>Delete</button></div>
+    </ul>
+    </div>
     )
-}
+    } 
 
 export default ToDoListItem
